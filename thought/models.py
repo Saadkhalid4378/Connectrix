@@ -3,9 +3,9 @@ from user.models import User
 # Create your models here.
 
 class Thought(models.Model):
-    user = models.ForeignKey(User)
-    title = models.CharField()
-    image = models.ImageField(upload_to="thought_image/")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=16)
+    image = models.ImageField(upload_to="thought_image/", default='default.jpg')
     date_time = models.DateTimeField(auto_now_add=True)
     is_private = models.BooleanField(default=True)
 
@@ -14,8 +14,8 @@ class Thought(models.Model):
     
 
 class Comment(models.Model):
-    user = models.ForeignKey(User)
-    thought = models.ForeignKey(Thought)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
     text = models.CharField(max_length = 264)
     date_time = models.DateTimeField(auto_now_add=True)
 
@@ -24,25 +24,25 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey(User)
-    thought = models.ForeignKey(Thought)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'liked {self.user}'
 
 
 class Share(models.Model):
-    user = models.ForeignKey(User)
-    thought = models.ForeignKey(Thought)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'shared by {self.user}'
 
 
 class Comment_reply(models.Model):
-    user = models.ForeignKey(User)
-    thought = models.ForeignKey(Thought)
-    comment = models.ForeignKey(Comment)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'replied {self.user}'

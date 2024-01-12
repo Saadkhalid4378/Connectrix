@@ -1,6 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from .forms import Signup
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
+
+
+def loginpage(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+            # return HttpResponse('homepage') 
+        else:
+            return HttpResponse(user)
+
+    context = {'login': login}
+    return render(request, 'login.html', context)
 
 def signup(request):
     form = Signup()
@@ -8,5 +25,10 @@ def signup(request):
         form = Signup(request.POST)
         if form.is_valid():
             form.save()
+        else:
+            return HttpResponse(form.error_messages)
     context = {'form': form}
     return render(request, 'signup.html', context)
+
+def home(request):
+    return render(request, 'home.html')

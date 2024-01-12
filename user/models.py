@@ -7,7 +7,7 @@ class User(AbstractUser):
     pass
 
 # class Profile(models.Model):
-#     user = models.OneToOneRel(User)
+# user = models.OneToOneField(User)
 #     phone = models.CharField(max_length = 12)
 #     city = models.CharField()
 #     date_of_birth = models.DateField()

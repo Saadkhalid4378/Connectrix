@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h>hhhhhh</h>
+
+<!-- thought_detail.html -->
+
+
+
+{% block content %}
+  <h1>{{ thought.title }}</h1>
+  <p>Posted by: {{ thought.user.username }} on {{ thought.date_time }}</p>
+  <img src="{{ thought_image.url }}" alt="{{ thought.title }}">
+  <p>{{ thought.content }}</p>
+  <!-- Add any additional details you want to display -->
+{% endblock %}
+
+
+
+
+</body>
+</html>

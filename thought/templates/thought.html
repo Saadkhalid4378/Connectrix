@@ -1,26 +1,17 @@
-_<!-- create_thought.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-     
 
+   {% extends "base.html" %}
 
-{% block content %}
+{% block section %}
+
   <h1>Create a Thought</h1>
-  <form method="post" enctype="multipart/form-data" action="{% url'thought_detail' %}">
+  <form method="post" enctype="multipart/form-data" action="{% url 'create_thought' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Thought</button>
   </form>
-{% endblock %}
+
+{% endblock section %}
 
 
 
 
-</body>
-</html>

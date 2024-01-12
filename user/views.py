@@ -11,7 +11,8 @@ def loginpage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            # return redirect('home')
+            return redirect('create_thought')
             # return HttpResponse('homepage') 
         else:
             return HttpResponse(user)

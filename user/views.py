@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect, HttpResponse
-from user.forms import Signup, Profile
+from user.forms import Signup, ProfileForm
+from user.models import User, Profile
+from django.views.generic import TemplateView, ListView, CreateView
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
-def profile(request):
-    pass
+class Profile_view(ListView):
+    model = User
+    form = ProfileForm
+    template_name = 'profile.html'
+    fields = '__all__'
+    # add a slug field in models.py according to user name
+
 
 def loginpage(request):
     if request.method == 'POST':
@@ -13,8 +20,8 @@ def loginpage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # return redirect('home')
-            return redirect('create_thought')
+            return redirect('home')
+            # return redirect('create_thought')
             # return HttpResponse('homepage') 
         else:
             return HttpResponse(user)

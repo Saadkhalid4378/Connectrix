@@ -39,8 +39,16 @@
               </li> {% endcomment %}
             </ul>
             <form class="d-flex" role="search">
+              <button class="btn btn-outline-success me-2" type="submit">Search</button>
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <p class=" m-2" >Helllow,{{ user.username }}!</p>
+              <button class="btn btn-outline-success" type="submit">
+              {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% comment %} {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %} {% endcomment %}
+            </button> 
             </form>
           </div>
         </div>

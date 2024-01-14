@@ -32,15 +32,18 @@ def loginpage(request):
     return render(request, 'login.html', context)
 
 def signup(request):
-    form = Signup()
-    if request.method == 'POST':
-        form = Signup(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            return HttpResponse(form.error_messages)
-    context = {'form': form}
-    return render(request, 'signup.html', context)
+    # if request.user.is_authenticated:
+    #     return redirect('login')
+    # else:
+        form = Signup()
+        if request.method == 'POST':
+            form = Signup(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                return HttpResponse(form.error_messages)
+        context = {'form': form}
+        return render(request, 'signup.html', context)
 
 
 def home(request):
@@ -51,7 +54,7 @@ def about(request):
     pass
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class Profile_view(ListView):
     model = User
     form = ProfileForm

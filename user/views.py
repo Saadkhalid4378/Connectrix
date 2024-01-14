@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import Signup
+from user.forms import Signup, Profile
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
+def profile(request):
+    pass
 
 def loginpage(request):
     if request.method == 'POST':

@@ -3,12 +3,42 @@
 
 {% block section %}
 
+<div class="container mt-4">
   <h1>Create a Thought</h1>
+  <form method="post" enctype="multipart/form-data" action="{% url 'create_thought' %}">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="{{ form.title.id_for_label }}">Title:</label>
+      {{ form.title }}
+    </div>
+    
+    <div class="form-group">
+      <label for="{{ form.image.id_for_label }}">Image:</label>
+      {{ form.image }}
+    </div>
+    
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="{{ form.is_private.id_for_label }}" name="{{ form.is_private.name }}">
+      <label class="form-check-label" for="{{ form.is_private.id_for_label }}">Is Private</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Create Thought</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+  {% comment %} <h1>Create a Thought</h1>
   <form method="post" enctype="multipart/form-data" action="{% url 'create_thought' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Thought</button>
-  </form>
+  </form> {% endcomment %}
 
 {% endblock section %}
 

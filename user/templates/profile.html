@@ -2,7 +2,58 @@
 
 {% block section %}
 
+  {% comment %} <h2>User Profile</h2> {% endcomment %}
+
+  {% comment %} <div>
+    <form action="{% url 'profile' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Profile</button>
+    </form>
+  </div> {% endcomment %}
+
+  {% comment %} <hr>
+  <h3>Profile Details</h3>
+  <ul>
+    <li><strong>Username:</strong> {{ form.Username }}</li>
+    <!-- Add other profile details as needed -->
+  </ul> {% endcomment %}
+{% comment %} <h2>User Profile</h2>
+
+  <div>
+    <form action="{% url 'profile' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Profile</button>
+    </form>
+  </div>
+
+  <hr> {% endcomment %}
+
+  {% comment %} <h3>Profile Details</h3>
+    <form action="{% url 'edit_profile' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Edit Profile</button>
+  </form> {% endcomment %}
+  <ul>
+    <li><strong>Username:</strong> {{ object.user.username }}</li>
+    <li><strong>Email:</strong> {{ object.user.email }}</li>
+    <li><strong>Bio:</strong> {{ object.bio }}</li>
+    <li><strong>Date of Birth:</strong> {{ object.date_of_birth }}</li>
+    <li><strong>Phone:</strong> {{ object.phone }}</li>
+    <li><strong>City:</strong> {{ object.city }}</li>
+    {% if object.image %}
+      <li><strong>Profile Image:</strong> <img src="{{ object.image.url }}" alt="Profile Image"></li>
+    {% endif %}
+  </ul>
+
+  <hr>
+
+
+
+
 <button type="submit" > <a href="{% url 'create_thought' %}"> Create thought </a> </button>
+  </form>
 
 
 {% endblock section %}

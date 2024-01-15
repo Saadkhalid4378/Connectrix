@@ -53,6 +53,13 @@
           </div>
         </div>
       </nav>
+      
+        {% comment %} <h1>List view</h1>
+{% for thought in thoughts %}
+    <p href="{% url 'users_thought' %}">{{ thought.user.username }}</p>
+    <a href="{% url 'users_thought' %}">{{ thought.title }}</a>
+    <img src="{{ thought.image.url }}" alt="{{ thought.title }}">
+{% endfor %} {% endcomment %}
 
 
 

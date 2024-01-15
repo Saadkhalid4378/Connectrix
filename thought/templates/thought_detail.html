@@ -6,19 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h>hhhhhh</h>
 
 <!-- thought_detail.html -->
 
+    {% extends "base.html" %}
+    <h1>thought details</h1>
 
-
-{% block content %}
+{% block section %}
   <h1>{{ thought.title }}</h1>
   <p>Posted by: {{ thought.user.username }} on {{ thought.date_time }}</p>
   <img src="{{ thought_image.url }}" alt="{{ thought.title }}">
   <p>{{ thought.content }}</p>
   <!-- Add any additional details you want to display -->
-{% endblock %}
+{% endblock section %}
 
 
 

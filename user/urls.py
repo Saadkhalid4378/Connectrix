@@ -8,10 +8,12 @@ Class-based views
 """
 from django.urls import path
 from user.views import home, signup, loginpage, logoutuser
-from user.views import Profile_view
+from user.views import Profile_view, Edit_profile
 
 urlpatterns = [
+    path('edit_profile/<pk>/', Edit_profile.as_view(), name='edit_profile'),
     path('profile/', Profile_view.as_view(), name='profile'),
+    # path('home/', Home.as_view(), name='home'),
 
     path('logout/', logoutuser, name='logout'),
     path('login/', loginpage, name='login'),

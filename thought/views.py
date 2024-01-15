@@ -16,10 +16,10 @@ class User_thoughts(ListView):
     context_object_name = 'thoughts'
     # ordering = ['-creat_time']
 
-class Thought_detail(DetailView):
-    model = Thought
-    template_name = 'thought_detail.html'
-    context_object_name = 'thought'
+# class Thought_detail(DetailView):
+#     model = Thought
+#     template_name = 'thought_detail.html'
+#     context_object_name = 'thought'
     
 @login_required
 def thought_detail(request, thought_id):

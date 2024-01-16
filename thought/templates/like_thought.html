@@ -1,0 +1,14 @@
+<!-- thought_detail.html -->
+
+<h1>{{ thought.title }}</h1>
+<p>{{ thought.date_time }}</p>
+<img src="{{ thought.image.url }}" alt="{{ thought.title }}">
+
+<form method="post" action="{% url 'like_thought' thought_id=thought.id %}">
+  {% csrf_token %}
+  <button type="submit" name="like_button">
+    {% if is_liked %}Unlike{% else %}Like{% endif %}
+  </button>
+</form>
+
+<p>Likes: {{ likes.count }}</p>

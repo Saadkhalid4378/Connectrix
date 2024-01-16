@@ -49,7 +49,8 @@ def signup(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    return redirect("/thought/users_thought")
+    # return render(request, 'user/home.html')
 
 # class Home(View):
 #      view = User_thoughts

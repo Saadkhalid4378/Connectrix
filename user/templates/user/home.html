@@ -5,11 +5,27 @@
 
 <p>this is home page</p>
   <h1>List view</h1>
-{% for thought in thoughts %}
-    <p>{{ thought.user.username }}</p>
-    <a href="{% url 'thought_detail' thought.pk %}">{{ thought.title }}</a>
-    <img src="{{thought.image.url}}" alt="{{ thought.title }}"/>
-{% endfor %}
+{% comment %} {% for thought in thoughts %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ thought.title }}</h5>
+      <p class="card-text">{{ thought.user.username }}</p>
+      <a href="{% url 'thought_detail' thought.pk %}" class="card-link">Details</a>
+    </div>
+    <img src="{{ thought.image.url }}" class="card-img-bottom" alt="{{ thought.title }}">
+  </div>
+{% endfor %} {% endcomment %}
 <!-- <button type="submit" > <a href="profile"> profile </a> </button> -->
+{% for thought in thoughts %}
+<div class="card" style="width: 18rem; margin-bottom: 1rem;">
+  <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ thought.title }}</h5>
+    <p class="card-text">{{ thought.user.username }}</p>
+    <p class="card-text">{{ thought.date_time }}</p>
+    <a href="{% url 'thought_detail' thought.pk %}" class="btn btn-primary">Details</a>
+  </div>
+</div>
+{% endfor %}
 
 {% endblock section %}

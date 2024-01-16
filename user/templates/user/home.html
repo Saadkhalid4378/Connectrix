@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block section %}
+
+<p>this is home page</p>
+  <h1>List view</h1>
+{% for thought in thoughts %}
+    <p>{{ thought.user.username }}</p>
+    <a href="{% url 'thought_detail' thought.pk %}">{{ thought.title }}</a>
+    <img src="{{thought.image.url}}" alt="{{ thought.title }}"/>
+{% endfor %}
+<!-- <button type="submit" > <a href="profile"> profile </a> </button> -->
+
+{% endblock section %}

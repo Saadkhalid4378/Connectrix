@@ -12,7 +12,7 @@ from user.models import User
 
 class User_thoughts(ListView):
     model = Thought
-    template_name = 'thought_list.html'
+    template_name = 'user/home.html'
     context_object_name = 'thoughts'
     # ordering = ['-creat_time']
 

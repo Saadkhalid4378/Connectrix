@@ -13,6 +13,17 @@ class Thought(models.Model):
         return f'{self.title}'
     
 
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'liked {self.user}'
+
+
+
+
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
@@ -22,13 +33,6 @@ class Comment(models.Model):
     def __str__(self) -> str:
         return f'commented {self.text}'
 
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'liked {self.user}'
 
 
 class Share(models.Model):

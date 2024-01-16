@@ -10,8 +10,8 @@ from user.models import User
 # Create your views here.
 
 @login_required
-def like_thought(request, thought_id):
-    thought = get_object_or_404(Thought, pk=thought_id)
+def like_thought(request, pk):
+    thought = get_object_or_404(Thought, pk=pk)
     likes = Like.objects.filter(thought=thought)
     is_liked = likes.filter(user=request.user).exists()
 

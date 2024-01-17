@@ -30,9 +30,10 @@
 
   <hr> {% endcomment %}
 
-  <form action="{% url 'edit_profile' request.user %}" method="post">
+  <form action="{% url 'edit_profile' request.user.id %}" method="post">
     {% csrf_token %}
-    <button type="submit">Edit Profile{{editprofile}}</button>
+     {{form.as_p}}
+    <button type="submit">update</button>
   </form> 
   <h3>Profile Details</h3>
   <ul> 

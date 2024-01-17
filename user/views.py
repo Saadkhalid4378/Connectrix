@@ -1,6 +1,6 @@
 from typing import Any
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse,get_object_or_404, HttpResponseRedirect
 # from django.urls import reverse
 from user.forms import Signup, ProfileForm
 from user.models import User, Profile
@@ -41,7 +41,7 @@ def signup(request):
             form = Signup(request.POST)
             if form.is_valid():
                 user = form.save()
-                profile = Profile(user=user, user=user.email)
+                profile = Profile(user=user)
                 profile.save()
                 return redirect('login')
             else:
@@ -70,5 +70,10 @@ class Edit_profile(UpdateView):
     template_name = 'profile.html'
     fields = '__all__'
     context_object_name = 'editprofile'
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
+    # slug_field = 'slug'
+    # slug_url_kwarg = 'slug'
+
+    def get_object(self, queryset=None):
+        # Retrieve the Profile object based on the user ID
+        user_id = self.request.user.id
+        return get_object_or_404(Profile, user_id=user_id)

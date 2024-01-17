@@ -50,7 +50,8 @@ class Users_thoughts(ListView):
     def get_queryset(self):
         # Filter thoughts based on the is_private field and the current user
         if ['is_privste']:
-            queryset = Thought.objects.filter(user = self.request.user)
+            self.request.user
+            queryset = Thought.objects.filter(is_private=False)
             print(queryset)
             return queryset
         else:

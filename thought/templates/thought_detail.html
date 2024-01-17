@@ -13,11 +13,19 @@
     <h1>thought details</h1>
 
 {% block section %}
-  <h1>{{ thought.title }}</h1>
+  {% comment %} <h1>{{ thought.title }}</h1>
   <p>Posted by: {{ thought.user.username }} on {{ thought.date_time }}</p>
-  <img src="{{ thought_image.url }}" alt="{{ thought.title }}">
-  <p>{{ thought.content }}</p>
+  <img src="{{ thought.image.url }}" alt="{{ thought.title }}">
+  <p>{{ thought.content }}</p> {% endcomment %}
   <!-- Add any additional details you want to display -->
+  <div class="card" style="width: 18rem; margin-bottom: 1rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ thought.title }}</h5>
+    <p class="card-text">Posted by: {{ thought.user.username }} on {{ thought.date_time }} </p>
+    <p class="card-text">{{ thought.content }}</p>
+    <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+  </div>
+</div>
 {% endblock section %}
 
 

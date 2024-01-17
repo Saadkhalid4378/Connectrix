@@ -30,12 +30,12 @@
 
   <hr> {% endcomment %}
 
-  {% comment %} <h3>Profile Details</h3>
-    <form action="{% url 'edit_profile' %}" method="post">
+  <form action="{% url 'edit_profile' request.user %}" method="post">
     {% csrf_token %}
-    <button type="submit">Edit Profile</button>
-  </form> {% endcomment %}
-  <ul>
+    <button type="submit">Edit Profile{{editprofile}}</button>
+  </form> 
+  <h3>Profile Details</h3>
+  <ul> 
     <li><strong>Username:</strong> {{ object.user.username }}</li>
     <li><strong>Email:</strong> {{ object.user.email }}</li>
     <li><strong>Bio:</strong> {{ object.bio }}</li>

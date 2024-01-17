@@ -1,3 +1,5 @@
+from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 # from django.urls import reverse
 from user.forms import Signup, ProfileForm
@@ -42,6 +44,7 @@ def signup(request):
             form = Signup(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('login')
             else:
                 return HttpResponse(form.error_messages)
         context = {'form': form}
@@ -73,6 +76,9 @@ class Profile_view(ListView):
 
 class Edit_profile(UpdateView):
     model = Profile
-    # form = ProfileForm
-    template_name = 'edit_profile.html'
+    form = ProfileForm
+    template_name = 'profile.html'
     fields = '__all__'
+    context_object_name = 'editprofile'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'

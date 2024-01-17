@@ -25,15 +25,14 @@ def like_thought(request, pk):
                 likes.filter(user=request.user).delete()
 
             # Redirect to the same page after handling the like action
-            return redirect('thought_detail', thought_id=thought.id)
-
+            # return redirect('thought_detail', thought_id=thought.id)
     context = {
         'thought': thought,
         'likes': likes,
         'is_liked': is_liked,
     }
 
-    return render(request, 'thought_detail.html', context)
+    return render(request, 'like_thought.html', context)
 
 
 

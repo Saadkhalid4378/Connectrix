@@ -85,10 +85,11 @@ def thought_detail(request, thought_id):
 
     if request.method == 'POST':
         text = request.POST.get('text')
-        thought_comment = Comment(text=text, thought=thought,  user=request.user)
-        print(f'printtttttttttttttt{thought_comment}')
+        # print(f'shoqqqqqqqqqqqq{text}')
+        thought_comment = Comment(text=text, thought=thought, user=request.user)
+        # print(f'printtttttttttttttt{thought_comment}')
         thought_comment.save()
-        return HttpResponse('comment added')
+        # return HttpResponse('comment added')
     
     return render( request, 'thought_detail.html', {'new_comment': new_comment, 'comment': comment, 'thought': thought, 'pk':thought_id})
 

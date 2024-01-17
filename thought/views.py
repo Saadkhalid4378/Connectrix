@@ -1,8 +1,10 @@
  
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Thought, Like
-from .forms import ThoughtForm  
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Thought, Like, Comment
+from .forms import ThoughtForm
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 from django.views.generic.detail import DetailView
 from user.models import User
@@ -36,9 +38,6 @@ def like_thought(request, pk):
 
 
 
-
-
-
 class User_thoughts(ListView):
     model = Thought
     template_name = 'user/home.html'
@@ -64,7 +63,19 @@ class User_thoughts(ListView):
 @login_required
 def thought_detail(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)
-    return render(request, 'thought_detail.html', {'thought': thought})
+    comment = thought.comment.all()
+    new_comment = None
+    # return render(request, 'thought_detail.html', {'thought': thought})
+
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        thought_comment = Comment(text=text, thought=thought,  user=request.user)
+        print(f'printtttttttttttttt{thought_comment}')
+        thought_comment.save()
+        return HttpResponse('comment added')
+    
+    return render( request, 'thought_detail.html', {'new_comment': new_comment, 'comment': comment, 'thought': thought, 'pk':thought_id})
+
 
 @login_required
 def create_thought(request):
@@ -83,15 +94,15 @@ def create_thought(request):
 
 
 
+# class Comment_View(CreateView):
+#     model = Comment
+#     form = CommentForm
+#     template_name = 'comment.html'
+#     success_url = reverse_lazy('comment_thought')  # Update with your actual URL name
+#     fields = '__all__'  
 
-
-
-
-# def like_thought(request):
-#     thought = thought.objects.all()
-#     likes = Like.objects.all()
-#     context = {
-#        'thought': thought,
-#        'likes': likes,
-#     }
-#     return render(request, 'like_thought.html', context)
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         form.instance.post = get_object_or_404(Thought, pk=self.kwargs['pk'])
+#         print()
+#         return super().form_valid(form)

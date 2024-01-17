@@ -25,6 +25,18 @@
     <p class="card-text">{{ thought.content }}</p>
     <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
   </div>
+  {% if comment %}
+  {% for cmt in comment %}
+    {{cmt.user}}
+    {{cmt.text}}
+  
+  {% endfor %}
+  {% endif %}
+  <form action="" method="post">
+  {% csrf_token %}
+    <input type="text" name=" tesxt">
+    <button type="submit">submit</button>
+  </form>
 </div>
 {% endblock section %}
 

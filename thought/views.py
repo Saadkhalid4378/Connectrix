@@ -45,6 +45,17 @@ class User_thoughts(ListView):
     template_name = 'user/home.html'
     context_object_name = 'thoughts'
     # ordering = ['-creat_time']
+    # def get_queryset(self):
+    #     # Filter thoughts based on the is_private field and the current user
+    #     if ['is_privste']:
+    #         user = self.request.user
+    #         queryset = Thought.objects.filter(is_private=False)
+    #         print(queryset)
+    #         return queryset
+    #     else:
+    #         Thought.objects.filter(is_private=True)
+    #         print(queryset)
+    #         return queryset
 
 # class Thought_detail(DetailView):
 #     model = Thought

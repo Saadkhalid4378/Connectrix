@@ -1,5 +1,5 @@
-<form method= "post" action="">
+<form method= "post" action="{% url 'edit_profile' request.user.pk  %}">
 {% csrf_token %}
-{{form}}
-    <button type="submit" value="submit">update</button>
+<!-- <a href="{% url 'edit_profile' request.user.pk  %}">{{editprofile}}</a>  -->
+    <button type="submit">{{editprofile}}</button>
 </form>

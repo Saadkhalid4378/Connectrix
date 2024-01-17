@@ -36,14 +36,13 @@ def loginpage(request):
     return render(request, 'login.html', context)
 
 def signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('login')
-    # else:
         form = Signup()
         if request.method == 'POST':
             form = Signup(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+                profile = Profile(user=user, user=user.email)
+                profile.save()
                 return redirect('login')
             else:
                 return HttpResponse(form.error_messages)
@@ -54,15 +53,6 @@ def signup(request):
 def home(request):
     return redirect("/thought/users_thought")
     # return render(request, 'user/home.html')
-
-# class Home(View):
-#      view = User_thoughts
-     
-
-
-def about(request):
-    pass
-
 
 # @method_decorator(login_required(login_url='login'), name='dispatch')
 class Profile_view(ListView):

@@ -25,18 +25,37 @@
     <p class="card-text">{{ thought.content }}</p>
     <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
   </div>
-  {% if comment %}
-  {% for cmt in comment %}
-    {{cmt.user}}
-    {{cmt.text}}
-  
-  {% endfor %}
-  {% endif %}
-  <form action="" method="post">
-  {% csrf_token %}
-    <input type="text" name="text">
-    <button type="submit">submit</button>
-  </form>
+ 
+
+<form method="post" action="{% url 'thought_detail' thought_id=thought.id %}">
+    {% csrf_token %}
+    <button type="submit" name="like_button">
+        {% if is_liked %}
+            Unlike
+        {% else %}
+            Like
+        {% endif %}
+    </button>
+     <p>Likes: {{ like_count }}</p>
+</form>
+
+{% for c in comment %}
+    <p>{{ c.user.username }}: {{ c.text }}</p>
+{% endfor %}
+
+<!-- New Comment Form -->
+<form method="post" action="{% url 'thought_detail' thought_id=thought.id %}">
+    {% csrf_token %}
+    <input type="text" name="text" placeholder="Add a comment">
+    <button type="submit">Add Comment</button>
+</form>
+
+<!-- Display new comment if any -->
+{% if new_comment %}
+    <p>New Comment: {{ new_comment.user.username }}: {{ new_comment.text }}</p>
+{% endif %}
+
+
 </div>
 {% endblock section %}
 

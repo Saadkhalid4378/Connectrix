@@ -43,7 +43,9 @@ class Share(models.Model):
 class Comment_reply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     thought = models.ForeignKey(Thought, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name= 'reply')
+    text = models.CharField(max_length = 264, default="comment reply")
+
 
     def __str__(self):
         return f'replied {self.user}'

@@ -56,5 +56,22 @@
 <button type="submit" > <a href="{% url 'create_thought' %}"> Create thought </a> </button>
   </form>
 
+  <div>
+    <h1>User Profile</h1>
+    <p>Username: {{ user_profile.username }}</p>
+    <!-- Add other user profile fields as needed -->
+  </div>
+
+  <!-- Display User Thoughts -->
+  <div>
+    <h2>User Thoughts</h2>
+    {% for thought in thoughts %}
+      <div>
+        <p>{{ thought.content }}</p>
+        <!-- Add other thought fields as needed -->
+      </div>
+    {% endfor %}
+  </div>
+
 
 {% endblock section %}

@@ -11,33 +11,6 @@ from user.models import User
 
 # Create your views here.
 
-@login_required
-def like_thought(request, pk):
-    thought = get_object_or_404(Thought, pk=pk)
-    likes = Like.objects.filter(thought=thought)
-    is_liked = likes.filter(user=request.user).exists()
-
-    if request.method == 'POST':
-        if 'like_button' in request.POST:
-            if not is_liked:
-                like = Like(user=request.user, thought=thought)
-                like.save()
-            else:
-                # Unlike if already liked
-                likes.filter(user=request.user).delete()
-
-            # Redirect to the same page after handling the like action
-            # return redirect('thought_detail', thought_id=thought.id)
-    context = {
-        'thought': thought,
-        'likes': likes,
-        'is_liked': is_liked,
-    }
-
-    return render(request, 'like_thought.html', context)
-
-
-
 
 class Users_thoughts(ListView):
     model = Thought
@@ -76,22 +49,107 @@ class User_thought(ListView):
         #     return queryset
         
     
+# @login_required
+# def thought_detail(request, thought_id):
+#     thought = get_object_or_404(Thought, pk=thought_id)
+#     comment = thought.comment.all()
+#     new_comment = None
+#     # return render(request, 'thought_detail.html', {'thought': thought})
+
+#     if request.method == 'POST':
+#         text = request.POST.get('text')
+#         # print(f'shoqqqqqqqqqqqq{text}')
+#         thought_comment = Comment(text=text, thought=thought, user=request.user)
+#         # print(f'printtttttttttttttt{thought_comment}')
+#         thought_comment.save()   
+#         context = {'new_comment': new_comment, 
+#                    'comment': comment, 
+#                    'thought': thought, 
+#                    'pk':thought_id}
+#     return render( request, 'thought_detail.html', context)
+
+
+
+
+
 @login_required
 def thought_detail(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)
     comment = thought.comment.all()
     new_comment = None
-    # return render(request, 'thought_detail.html', {'thought': thought})
+
+    # Like functionality
+    likes = Like.objects.filter(thought=thought)
+    is_liked = likes.filter(user=request.user).exists()
+    like_count = likes.count()
 
     if request.method == 'POST':
-        text = request.POST.get('text')
-        # print(f'shoqqqqqqqqqqqq{text}')
-        thought_comment = Comment(text=text, thought=thought, user=request.user)
-        # print(f'printtttttttttttttt{thought_comment}')
-        thought_comment.save()
-        # return HttpResponse('comment added')
-    
-    return render( request, 'thought_detail.html', {'new_comment': new_comment, 'comment': comment, 'thought': thought, 'pk':thought_id})
+        if 'text' in request.POST:
+            # Commenting
+            text = request.POST.get('text')
+            thought_comment = Comment(text=text, thought=thought, user=request.user)
+            thought_comment.save()
+            new_comment = thought_comment
+        elif 'like_button' in request.POST:
+            # Liking
+            if not is_liked:
+                like = Like(user=request.user, thought=thought)
+                like.save()
+            else:
+                # Unlike if already liked
+                likes.filter(user=request.user).delete()
+
+            # Redirect to the same page after handling the like action
+            return redirect('thought_detail', thought_id=thought.id)
+
+    context = {
+        'thought': thought,
+        'likes': likes,
+        'is_liked': is_liked,
+        'like_count': like_count,
+        'new_comment': new_comment,
+        'comment': comment,
+        'pk': thought_id,
+    }
+
+    return render(request, 'thought_detail.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+@login_required
+def like_thought(request, pk):
+    thought = get_object_or_404(Thought, pk=pk)
+    likes = Like.objects.filter(thought=thought)
+    is_liked = likes.filter(user=request.user).exists()
+
+    if request.method == 'POST':
+        if 'like_button' in request.POST:
+            if not is_liked:
+                like = Like(user=request.user, thought=thought)
+                like.save()
+            else:
+                # Unlike if already liked
+                likes.filter(user=request.user).delete()
+
+            # Redirect to the same page after handling the like action
+            # return redirect('thought_detail', thought_id=thought.id)
+    context = {
+        'thought': thought,
+        'likes': likes,
+        'is_liked': is_liked,
+    }
+
+    return render(request, 'like_thought.html', context)
+
 
 
 @login_required

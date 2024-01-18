@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 
 <!-- thought_detail.html -->
 
@@ -28,7 +20,7 @@
   <!-- New Comment Form -->
 <section style="background-color: #eee;">
   <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-      <form method="post" action="{% url 'thought_detail' thought_id=thought.id %}">
+      <form method="post" action="{% url 'thought_detail' thought.id %}">
           {% csrf_token %}
           <div class="d-flex flex-start w-100">
               <img class="rounded-circle shadow-1-strong me-3"
@@ -49,7 +41,7 @@
 </div>
 <!-- Like/Unlike Thought -->
 <!-- Like/Unlike Thought - Bootstrap Style -->
-<form method="post" action="{% url 'thought_detail' thought_id=thought.id %}">
+<form method="post" action="{% url 'thought_detail' thought.id %}">
     {% csrf_token %}
     
     <!-- Bootstrap Card for Like/Unlike -->
@@ -66,18 +58,6 @@
         </div>
     </div>
 </form>
-
-{% comment %} <form method="post" action="{% url 'thought_detail' thought_id=thought.id %}">
-  {% csrf_token %}
-  <button type="submit" name="like_button">
-      {% if is_liked %}
-          Unlike
-      {% else %}
-          Like
-      {% endif %}
-  </button>
-   <p>Likes: {{ like_count }}</p>
-</form> {% endcomment %}
 <!-- Display existing comments for the thought -->
 {% if comment %}
   <div class="container mt-4">
@@ -87,6 +67,11 @@
               <div class="card-body">
                   <h6 class="card-title">{{ cmt.user }}</h6>
                   <p class="card-text">{{ cmt.text }}</p>
+                    <form action="{% url 'replyComment' cmt.id %}" method="post"> {% csrf_token %}
+                     <input type="text" name="reply_coment">
+                     <button type="submit">reply</button> 
+                   <a href="{% url 'replyComment' cmt.id %}"> <button type="submit">show reply</button> </a>
+                    </form>
               </div>
           </div>
       {% endfor %}
@@ -96,9 +81,3 @@
 </div>
 
 {% endblock section %}
-
-
-
-
-</body>
-</html>

@@ -30,22 +30,23 @@ class Users_thoughts(ListView):
             print(queryset)
             return queryset
 
-class User_thought(ListView):
-    model = Thought
-    template_name = 'profile.html'
-    context_object_name = 'thought'
+# class User_thought(ListView):
+#     model = Thought
+#     template_name = 'profile.html'
+#     context_object_name = 'thought'
 
-    def get_queryset(self):
-        # Filter thoughts based on the is_private field and the current user
-        if ['is_privste']:
-            queryset = Thought.objects.filter(user = self.request.user)
-            print(queryset)
-            return queryset
+#     def get_queryset(self):
+#         # Filter thoughts based on the is_private field and the current user
+#         if ['is_privste']:
+#             queryset = Thought.objects.filter(user = self.request.user)
+#             print(queryset)
+#             return queryset
         # else:
         #     Thought.objects.filter(is_private=True)
         #     print(queryset)
         #     return queryset
 
+@login_required
 def replyComment(request,id):
         replyes = get_object_or_404(Comment, id=id)
         reply = replyes.reply.all()

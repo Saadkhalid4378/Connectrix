@@ -7,8 +7,8 @@ from user.forms import Signup, ProfileForm
 from user.models import User, Profile
 from thought.models import Thought
 # from django.views import View
-from thought.views import User_thought
-from django.views.generic import TemplateView, ListView, CreateView, DeleteView
+# from thought.views import User_thought
+from django.views.generic import TemplateView, ListView, CreateView,DetailView, DeleteView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -70,7 +70,7 @@ class User_thought(ListView):
             return queryset
 
 # @method_decorator(login_required(login_url='login'), name='dispatch')
-class Profile_view(User_thought, ListView):
+class Profile_view(DetailView):
     model = User
     form = ProfileForm
     template_name = 'profile.html'
@@ -78,14 +78,6 @@ class Profile_view(User_thought, ListView):
     # context_object_name = 'profile' 
     # add a slug field in models.py according to user name
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['thoughts'] = self.get_thoughts()  # Add thoughts to the context
-        return context
-
-    def get_thoughts(self):
-        # You can customize this method to get additional thoughts data if needed
-        return Thought.objects.filter(user=self.request.user, is_private=True)
 
     # def get_queryset(self) -> QuerySet[Any]:
     #     return super().get_queryset(User_thought)

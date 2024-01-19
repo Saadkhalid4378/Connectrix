@@ -12,7 +12,7 @@ from user.views import Profile_view, Edit_profile
 
 urlpatterns = [
     path('edit_profile/<pk>/', Edit_profile.as_view(), name='edit_profile'),
-    path('profile/', Profile_view.as_view(), name='profile'),
+    path('profile/<pk>/', Profile_view.as_view(), name='profile'),
     # path('home/', Home.as_view(), name='home'),
 
     path('logout/', logoutuser, name='logout'),

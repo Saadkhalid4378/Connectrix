@@ -120,6 +120,7 @@ def create_thought(request):
     if request.method == 'POST':
         form = ThoughtForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Form Data:", form.cleaned_data)
             thought = form.save(commit=False)
             thought.user = request.user
             # print("request.user: ",type(request.user))

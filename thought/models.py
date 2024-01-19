@@ -8,6 +8,7 @@ class Thought(models.Model):
     image = models.ImageField(upload_to="thought_image/", default='default.jpg')
     date_time = models.DateTimeField(auto_now_add=True)
     is_private = models.BooleanField(default=True)
+    text = models.CharField(max_length = 264, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.title}'

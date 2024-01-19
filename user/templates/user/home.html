@@ -20,8 +20,9 @@
 <div class="card" style="width: 18rem; margin-bottom: 1rem;">
   <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
   <div class="card-body">
-    <h5 class="card-title">{{ thought.title }}</h5>
     <p class="card-text">{{ thought.user.username }}</p>
+    <h5 class="card-title">{{ thought.title }}</h5>
+    <h5 class="card-title">{{ thought.text }}</h5>
     <p class="card-text">{{ thought.date_time }}</p>
     <a href="{% url 'thought_detail' thought.pk %}" class="btn btn-primary">Details</a>
   </div>

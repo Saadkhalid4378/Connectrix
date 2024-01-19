@@ -29,22 +29,7 @@ class Users_thoughts(ListView):
             Thought.objects.filter(is_private=True)
             print(queryset)
             return queryset
-
-# class User_thought(ListView):
-#     model = Thought
-#     template_name = 'profile.html'
-#     context_object_name = 'thought'
-
-#     def get_queryset(self):
-#         # Filter thoughts based on the is_private field and the current user
-#         if ['is_privste']:
-#             queryset = Thought.objects.filter(user = self.request.user)
-#             print(queryset)
-#             return queryset
-        # else:
-        #     Thought.objects.filter(is_private=True)
-        #     print(queryset)
-        #     return queryset
+        
 
 @login_required
 def replyComment(request,id):
@@ -57,22 +42,7 @@ def replyComment(request,id):
             reply_comment.save()   
             context = { 'reply': reply , 'id':id}
         return render( request, 'replycomment.html', context)
-# def replyComment(request,id):
-#     comments = Comment.objects.get(id=id)
-#     replyes = Comment_reply.objects.all( )
 
-#     if request.method == 'POST':
-#         user = request.user
-#         reply_content = request.POST.get('reply_coment')
-#         newReply = Comment_reply(user=user,  thought=comments.thought, comment=comments, text=reply_content)
-#         newReply.reply_comment = comments
-#         newReply.save()
-#         messages.success(request, 'Comment replied!')
-#         return redirect('thought_detail',thought_id=comments.thought.id) 
-#     context = {
-#         'replyes' : replyes
-#     }
-#     return render(request, 'replycomment.html', context)
 
 @login_required
 def thought_detail(request, thought_id):
@@ -131,6 +101,39 @@ def create_thought(request):
     return render(request, 'thought.html', {'form': form})
 
 
+# def replyComment(request,id):
+#     comments = Comment.objects.get(id=id)
+#     replyes = Comment_reply.objects.all( )
+
+#     if request.method == 'POST':
+#         user = request.user
+#         reply_content = request.POST.get('reply_coment')
+#         newReply = Comment_reply(user=user,  thought=comments.thought, comment=comments, text=reply_content)
+#         newReply.reply_comment = comments
+#         newReply.save()
+#         messages.success(request, 'Comment replied!')
+#         return redirect('thought_detail',thought_id=comments.thought.id) 
+#     context = {
+#         'replyes' : replyes
+#     }
+#     return render(request, 'replycomment.html', context)
+
+
+# class User_thought(ListView):
+#     model = Thought
+#     template_name = 'profile.html'
+#     context_object_name = 'thought'
+
+#     def get_queryset(self):
+#         # Filter thoughts based on the is_private field and the current user
+#         if ['is_privste']:
+#             queryset = Thought.objects.filter(user = self.request.user)
+#             print(queryset)
+#             return queryset
+        # else:
+        #     Thought.objects.filter(is_private=True)
+        #     print(queryset)
+        #     return queryset
 
 # class Comment_View(CreateView):
 #     model = Comment

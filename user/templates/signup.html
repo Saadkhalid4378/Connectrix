@@ -36,13 +36,23 @@
 
                 <div class="form-outline mb-4">
                   {{ form.password1.label_tag }}
-                  {{ form.password1 }}
+                  <p>{{ form.password1 }}</p>
                 </div>
 
                 <div class="form-outline mb-4">
                   {{ form.password2.label_tag }}
                   {{ form.password2 }}
                 </div>
+
+                {% comment %} {% if not request.user.is_authenticated %}
+                <h1>{{error}}</h1>
+                {% endif %} {% endcomment %}
+
+                {% comment %} {% if form.password2.errors %}
+                <div class="invalid-feedback">
+                    {{ form.password2.errors }}
+                </div>
+                {% endif %} {% endcomment %}
 
                 <div class="form-check d-flex justify-content-center mb-5">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />

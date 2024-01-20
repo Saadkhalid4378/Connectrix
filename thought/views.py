@@ -6,11 +6,18 @@ from .models import Thought, Like, Comment, Comment_reply
 from .forms import ThoughtForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 from django.views.generic.detail import DetailView
 from user.models import User
 
 # Create your views here.
+
+
+class DeleteTHoughts(LoginRequiredMixin, DeleteView):
+    model = Thought
+    template_name = 'deletethought.html'
+    context_object_name = 'delete'
+    success_url = reverse_lazy('users_thoughts')
 
 
 class UsersThoughts(ListView):
@@ -28,8 +35,11 @@ class UsersThoughts(ListView):
         #     Thought.objects.filter(is_private=True)
         #     # print(queryset)
         #     return queryset
-        
 
+"""  this function is use to add repply on the
+     comments function will get id of comment 
+     for reply "replyes" will store the comment id 
+     and thought.id on which person is commenting    """
 @login_required
 def reply_Comment(request,id):
         replyes = get_object_or_404(Comment, id=id)

@@ -2,76 +2,42 @@
 
 {% block section %}
 
-  {% comment %} <h2>User Profile</h2> {% endcomment %}
-
-  {% comment %} <div>
-    <form action="{% url 'profile' %}">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Save Profile</button>
-    </form>
-  </div> {% endcomment %}
-
-  {% comment %} <hr>
-  <h3>Profile Details</h3>
-  <ul>
-    <li><strong>Username:</strong> {{ form.Username }}</li>
-    <!-- Add other profile details as needed -->
-  </ul> {% endcomment %}
-{% comment %} <h2>User Profile</h2>
-
-  <div>
-    <form action="{% url 'profile' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Save Profile</button>
-    </form>
-  </div>
-
-  <hr> {% endcomment %}
-
-  <form action="{% url 'edit_profile' request.user.id %}" method="post">
-    {% csrf_token %}
-     {{form.as_p}}
-    <button type="submit">update</button>
-  </form> 
-  <h3>Profile Details</h3>
-  <ul> 
-    <li><strong>Username:</strong> {{ object.user.username }}</li>
-    <li><strong>Email:</strong> {{ object.user.email }}</li>
-    <li><strong>Bio:</strong> {{ object.bio }}</li>
-    <li><strong>Date of Birth:</strong> {{ object.date_of_birth }}</li>
-    <li><strong>Phone:</strong> {{ object.phone }}</li>
-    <li><strong>City:</strong> {{ object.city }}</li>
-    {% if object.image %}
-      <li><strong>Profile Image:</strong> <img src="{{ object.image.url }}" alt="Profile Image"></li>
-    {% endif %}
-  </ul>
-
+  <button class="btn btn-outline-success me-2" type="submit">
+    <a href="{% url 'edit_profile' user.pk %}">Edit Profile </a>
+  </button>
   <hr>
 
-
-
-
-<button type="submit" > <a href="{% url 'create_thought' %}"> Create thought </a> </button>
+<!-- this is user to ceate thought(post) -->
+  <button class="btn btn-outline-success me-2" type="submit" > 
+    <a href="{% url 'create_thought' %}"> Create thought </a> </button>
   </form>
+  <!-- end ceate thought(post) -->
 
+{% comment %} 
   <div>
     <h1>User Profile</h1>
-    <p>Username: {{ user_profile.username }}</p>
-    <!-- Add other user profile fields as needed -->
-  </div>
+    <p>Username: {{ object.profile.username }}</p>
+  </div> {% endcomment %}
+
 
   <!-- Display User Thoughts -->
   <div>
     <h2>User Thoughts</h2>
-    {% for thought in thoughts %}
-      <div>
-        <p>{{ thought.content }}</p>
-        <!-- Add other thought fields as needed -->
+    {% for thought in thought %}
+    <div class="card" style="width: 40%; height: 0%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
+      <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+      <div class="card-body">
+        <p class="card-text">User : {{ thought.user.username }}</p>
+        <h5 class="card-title">{{ thought.title }}</h5>
+        <h5 class="card-title">{{ thought.text }}</h5>
+        <p class="card-text">{{ thought.date_time }}</p>
+        {% comment %} <a href="{% url 'user_thought' %}" class="btn btn-primary">Details</a> {% endcomment %}
       </div>
+    </div>
     {% endfor %}
   </div>
+  <!--end Display User Thoughts -->
+
 
 
 {% endblock section %}

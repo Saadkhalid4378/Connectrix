@@ -11,6 +11,7 @@ from thought.models import Thought
 from django.views.generic import TemplateView, ListView, CreateView,DetailView, DeleteView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -63,27 +64,32 @@ def home(request):
     # return render(request, 'user/home.html')
 
 
-class UserThought(ListView):
-    model = Thought
-    template_name = 'profile.html'
-    context_object_name = 'thought'
+# class UserThought(ListView):
+#     model = Thought
+#     template_name = 'profile.html'
+#     context_object_name = 'thought'
 
-    def get_queryset(self):
-        # Filter thoughts based on the is_private field and the current user
-        # if ['is_privste']:
-            queryset = Thought.objects.filter(user = self.request.user)
-            print(queryset)
-            return queryset
+#     def get_queryset(self):
+#         # Filter thoughts based on the is_private field and the current user
+#         # if ['is_private']:
+#             user=self.request.user
+#             queryset = Thought.objects.filter(user=user)
+#             print(queryset)
+#             return queryset
 
 # @method_decorator(login_required(login_url='login'), name='dispatch')
-class ProfileView(DetailView):
+class ProfileView(ListView):
     model = User
     form = ProfileForm
     template_name = 'profile.html'
-    fields = '__all__'
+    # fields = '__all__'
     # context_object_name = 'profile' 
     # add a slug field in models.py according to user name
-
+    def get_context_data(self, **kwargs: Any):
+        user=self.request.user
+        queryset = Thought.objects.filter(user=user)
+        context = {'thought': queryset} 
+        return(context)
 
     # def get_queryset(self) -> QuerySet[Any]:
     #     return super().get_queryset(User_thought)
@@ -99,12 +105,12 @@ class ProfileView(DetailView):
 
 
 
-class EditProfile(UpdateView):
+class EditProfile(LoginRequiredMixin, UpdateView):
     model = Profile
     form = ProfileForm
-    template_name = 'profile.html'
+    template_name = 'user/updateprofile.html'
     fields = ['bio', 'date_of_birth', 'phone', 'city', 'image']
-    context_object_name = 'editprofile'
+    # context_object_name = 'editprofile'
     # slug_field = 'slug'
     # slug_url_kwarg = 'slug'
 

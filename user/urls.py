@@ -14,9 +14,10 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('login/', login_page, name='login'),
     path('signup/', signup, name='signup'),
-    path('home/', home, name='home'),
+    path('', home, name='home'),
     
     path('edit_profile/<pk>/', EditProfile.as_view(), name='edit_profile'),
     path('profile/<pk>/', ProfileView.as_view(), name='profile'),
+    # path('user_thought/', UserThought.as_view(), name='user_thought'),
     # path('home/', Home.as_view(), name='home'),
 ]

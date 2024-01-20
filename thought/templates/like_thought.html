@@ -4,7 +4,7 @@
 <p>{{ thought.date_time }}</p>
 <img src="{{ thought.image.url }}" alt="{{ thought.title }}">
 
-<form method="post" action="{% url 'like_thought' pk=thought.pk %}">
+<form method="post" action="{% url 'like-thought' pk=thought.pk %}">
   {% csrf_token %}
   <button type="submit" class= 'btn btn-primary' name="like_button">
     {% if is_liked %}Unlike{% else %}Like{% endif %}

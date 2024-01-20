@@ -60,7 +60,7 @@ def signup(request):
 
 
 def home(request):
-    return redirect("/thought/users_thoughts")
+    return redirect("/thought/users-thoughts")
     # return render(request, 'user/home.html')
 
 

@@ -39,7 +39,7 @@ def reply_Comment(request,id):
         reply = replyes.reply.all()
 
         if request.method == 'POST':
-            text = request.POST.get('reply-coment')
+            text = request.POST.get('replycoment')
             reply_comment = Comment_reply(text=text, thought=replyes.thought ,comment=replyes, user=request.user)
             reply_comment.save()   
             context = { 'reply': reply , 'id':id}
@@ -85,7 +85,7 @@ def thought_detail(request, thought_id):
         'pk': thought_id,
     }
 
-    return render(request, 'thought-detail.html', context)
+    return render(request, 'thought_detail.html', context)
 
 
 @login_required

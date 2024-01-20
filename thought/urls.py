@@ -10,4 +10,5 @@ urlpatterns = [
     path('create_thought/', views.create_thought, name='create_thought'),
     # path('like_thought/<int:pk>', views.like_thought, name='like_thought'),
     # path('comment_thought/<int:pk>', views.Comment_View.as_view(), name='comment_thought'),
+    path('thought/<int:thought_id>/', views.share_thought, name='share_thought'),
 ]

@@ -25,22 +25,26 @@
                     {% csrf_token %}
 
                 <div class="form-outline mb-4">
-                  {{ form.username.label_tag }}
+                  {% comment %} {{ form.username.label_tag }} {% endcomment %}
+                  <i class="fa-solid fa-user"></i>
                   {{ form.username }}
                 </div>
 
                 <div class="form-outline mb-4">
                   {{ form.email.label_tag }}
+                  <i class="fa-solid fa-envelope"></i>
                   {{ form.email }}
                 </div>
 
                 <div class="form-outline mb-4">
                   {{ form.password1.label_tag }}
+                  <i class="fa-solid fa-lock"></i>
                   <p>{{ form.password1 }}</p>
                 </div>
 
                 <div class="form-outline mb-4">
                   {{ form.password2.label_tag }}
+                  <i class="fa-solid fa-lock"></i>
                   {{ form.password2 }}
                 </div>
 

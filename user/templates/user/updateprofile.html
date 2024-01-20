@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block section %}
+
+<!-- this is user to update(edit) user profile -->
+  <form action="{% url 'edit_profile' request.user.id %}" method="post">
+    {% csrf_token %}
+     {{form.as_p}}
+    <button type="submit">update</button>
+  </form> 
+  <h3>Profile Details</h3>
+  <ul> 
+    <li><strong>Username:</strong> {{ object.user.username }}</li>
+    <li><strong>Email:</strong> {{ object.user.email }}</li>
+    <li><strong>Bio:</strong> {{ object.bio }}</li>
+    <li><strong>Date of Birth:</strong> {{ object.date_of_birth }}</li>
+    <li><strong>Phone:</strong> {{ object.phone }}</li>
+    <li><strong>City:</strong> {{ object.city }}</li>
+    {% if object.image %}
+      <li><strong>Profile Image:</strong> <img src="{{ object.image.url }}" alt="Profile Image"></li>
+    {% endif %}
+  </ul>
+<!-- end to update(edit) user profile -->
+
+{% endblock section %}

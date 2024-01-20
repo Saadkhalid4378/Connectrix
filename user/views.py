@@ -16,13 +16,13 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 
-def logoutuser(request):
+def logout_user(request):
     # if request.method == 'POST':
         if request.user.is_authenticated:
             logout(request) 
             return redirect('login')
 
-def loginpage(request):
+def login_page(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -63,20 +63,20 @@ def home(request):
     # return render(request, 'user/home.html')
 
 
-class User_thought(ListView):
+class UserThought(ListView):
     model = Thought
     template_name = 'profile.html'
     context_object_name = 'thought'
 
     def get_queryset(self):
         # Filter thoughts based on the is_private field and the current user
-        if ['is_privste']:
+        # if ['is_privste']:
             queryset = Thought.objects.filter(user = self.request.user)
             print(queryset)
             return queryset
 
 # @method_decorator(login_required(login_url='login'), name='dispatch')
-class Profile_view(DetailView):
+class ProfileView(DetailView):
     model = User
     form = ProfileForm
     template_name = 'profile.html'
@@ -99,7 +99,7 @@ class Profile_view(DetailView):
 
 
 
-class Edit_profile(UpdateView):
+class EditProfile(UpdateView):
     model = Profile
     form = ProfileForm
     template_name = 'profile.html'

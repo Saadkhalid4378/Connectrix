@@ -13,26 +13,25 @@ from user.models import User
 # Create your views here.
 
 
-class Users_thoughts(ListView):
+class UsersThoughts(ListView):
     model = Thought
     template_name = 'user/home.html'
     context_object_name = 'thoughts'
    
     def get_queryset(self):
         # Filter thoughts based on the is_private field and the current user
-        if ['is_private']:
             # self.request.user
             queryset = Thought.objects.filter(is_private=False)
-            print(queryset)
+            # print(queryset)
             return queryset
-        else:
-            Thought.objects.filter(is_private=True)
-            print(queryset)
-            return queryset
+        # else:
+        #     Thought.objects.filter(is_private=True)
+        #     # print(queryset)
+        #     return queryset
         
 
 @login_required
-def replyComment(request,id):
+def reply_Comment(request,id):
         replyes = get_object_or_404(Comment, id=id)
         reply = replyes.reply.all()
 

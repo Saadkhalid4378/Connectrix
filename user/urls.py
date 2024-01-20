@@ -7,16 +7,16 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 """
 from django.urls import path
-from user.views import home, signup, loginpage, logoutuser
-from user.views import Profile_view, Edit_profile
+from user.views import home, signup, login_page, logout_user
+from user.views import ProfileView, EditProfile
 
 urlpatterns = [
-    path('edit_profile/<pk>/', Edit_profile.as_view(), name='edit_profile'),
-    path('profile/<pk>/', Profile_view.as_view(), name='profile'),
-    # path('home/', Home.as_view(), name='home'),
-
-    path('logout/', logoutuser, name='logout'),
-    path('login/', loginpage, name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('login/', login_page, name='login'),
     path('signup/', signup, name='signup'),
     path('home/', home, name='home'),
+    
+    path('edit_profile/<pk>/', EditProfile.as_view(), name='edit_profile'),
+    path('profile/<pk>/', ProfileView.as_view(), name='profile'),
+    # path('home/', Home.as_view(), name='home'),
 ]

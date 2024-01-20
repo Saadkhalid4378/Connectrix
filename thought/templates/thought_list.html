@@ -5,7 +5,7 @@
   <h1>List view</h1>
 {% for thought in thoughts %}
     <p>{{ thought.user.username }}</p>
-    <a href="{% url 'thought_detail' thought.pk %}">{{ thought.title }}</a>
+    <a href="{% url 'thought-detail' thought.pk %}">{{ thought.title }}</a>
     <img src="{{ thought.image.url }}" alt="{{ thought.title }}">
 {% endfor %}
 

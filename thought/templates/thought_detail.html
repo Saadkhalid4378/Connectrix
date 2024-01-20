@@ -42,7 +42,7 @@
 </div>
 <!-- Like/Unlike Thought -->
 <!-- Like/Unlike Thought - Bootstrap Style -->
-<form method="post" action="{% url 'thought_detail' thought.id %}">
+<form method="post" action="{% url 'thought-detail' thought.id %}">
     {% csrf_token %}
     
     <!-- Bootstrap Card for Like/Unlike -->
@@ -68,10 +68,10 @@
               <div class="card-body">
                   <h6 class="card-title">{{ cmt.user }}</h6>
                   <p class="card-text">{{ cmt.text }}</p>
-                    <form action="{% url 'replyComment' cmt.id %}" method="post"> {% csrf_token %}
-                     <input type="text" name="reply_coment">
+                    <form action="{% url 'reply-Comment' cmt.id %}" method="post"> {% csrf_token %}
+                     <input type="text" name="replycoment">
                      <button type="submit">reply</button> 
-                   <a href="{% url 'replyComment' cmt.id %}"> <button type="submit">show reply</button> </a>
+                   <a href="{% url 'reply-Comment' cmt.id %}"> <button type="submit">show reply</button> </a>
                     </form>
               </div>
           </div>

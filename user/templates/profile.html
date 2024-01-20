@@ -11,29 +11,31 @@
   <button class="btn btn-outline-success me-2" type="submit" > 
     <a href="{% url 'create_thought' %}"> Create thought </a> </button>
   </form>
-  <!-- end ceate thought(post) -->
+  <!-- end ceate thought(post) -->  
 
-{% comment %} 
-  <div>
-    <h1>User Profile</h1>
-    <p>Username: {{ object.profile.username }}</p>
-  </div> {% endcomment %}
+<h1>{{ username }}</h1>
+<p>Email: {{ email }}</p>
+{% comment %} <p>Email: {{ bio }}</p>
+<p>Email: {{ DOB }}</p>
+<p>Email: {{ phone }}</p>
+<p>Email: {{ city }}</p> {% endcomment %}
+
 
 
   <!-- Display User Thoughts -->
   <div>
     <h2>User Thoughts</h2>
     {% for thought in thought %}
-    <div class="card" style="width: 40%; height: 0%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
-      <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
-      <div class="card-body">
-        <p class="card-text">User : {{ thought.user.username }}</p>
-        <h5 class="card-title">{{ thought.title }}</h5>
-        <h5 class="card-title">{{ thought.text }}</h5>
-        <p class="card-text">{{ thought.date_time }}</p>
+          <div class="card" style="width: 40%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
+            <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+              <div class="card-body">
+                <p class="card-text">User : {{ thought.user.username }}</p>
+                <h5 class="card-title">{{ thought.title }}</h5>
+                <h5 class="card-title">{{ thought.text }}</h5>
+                <p class="card-text">{{ thought.date_time }}</p>
         {% comment %} <a href="{% url 'user_thought' %}" class="btn btn-primary">Details</a> {% endcomment %}
-      </div>
-    </div>
+              </div>
+          </div>
     {% endfor %}
   </div>
   <!--end Display User Thoughts -->

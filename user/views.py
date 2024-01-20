@@ -88,7 +88,14 @@ class ProfileView(ListView):
     def get_context_data(self, **kwargs: Any):
         user=self.request.user
         queryset = Thought.objects.filter(user=user)
-        context = {'thought': queryset} 
+        context = {'thought': queryset, 
+                    'username': user.username,
+                    'email': user.email,
+                    #  'bio': user.bio,
+                    #  'DOB': user.date_of_birth,
+                    #  'phone': user.phone,
+                    #  'city': user.city
+                    } 
         return(context)
 
     # def get_queryset(self) -> QuerySet[Any]:

@@ -52,7 +52,7 @@ def reply_Comment(request,id):
             reply_comment = Comment_reply(text=text, thought=replyes.thought ,comment=replyes, user=request.user)
             reply_comment.save()   
             context = { 'reply': reply , 'id':id}
-        return render( request, 'replycomment.html', context)
+        return render( request, 'thought_detail.html', context)
 
 
 @login_required

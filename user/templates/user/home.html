@@ -4,7 +4,7 @@
 {% block section %}
 
 <p>this is home page</p>
-  <h1>List view</h1>
+  {% comment %} <h1>List view</h1> {% endcomment %}
 {% comment %} {% for thought in thoughts %}
   <div class="card">
     <div class="card-body">
@@ -17,10 +17,10 @@
 {% endfor %} {% endcomment %}
 <!-- <button type="submit" > <a href="profile"> profile </a> </button> -->
 {% for thought in thoughts %}
-<div class="card" style="width: 18rem; margin-bottom: 1rem;">
+<div class="card" style="width: 40%; height: 0%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
   <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
   <div class="card-body">
-    <p class="card-text">{{ thought.user.username }}</p>
+    <p class="card-text">User : {{ thought.user.username }}</p>
     <h5 class="card-title">{{ thought.title }}</h5>
     <h5 class="card-title">{{ thought.text }}</h5>
     <p class="card-text">{{ thought.date_time }}</p>

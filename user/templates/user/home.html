@@ -24,8 +24,8 @@
     <h5 class="card-title">{{ thought.title }}</h5>
     <h5 class="card-title">{{ thought.text }}</h5>
     <p class="card-text">{{ thought.date_time }}</p>
-    <a href="{% url 'thought_detail' thought.pk %}" class="btn btn-primary">Details</a>
-    <a href="{% url 'share_thought' thought.pk %}" class="btn btn-primary">share Post</a>
+    <a href="{% url 'thought-detail' thought.pk %}" class="btn btn-primary">Details</a>
+    <a href="{% url 'share-thought' thought.pk %}" class="btn btn-primary">share Post</a>
   </div>
 </div>
 {% endfor %}

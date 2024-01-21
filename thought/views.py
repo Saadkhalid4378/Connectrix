@@ -14,17 +14,21 @@ from django.http import JsonResponse
 class DeleteTHoughts(LoginRequiredMixin, DeleteView):
     model = Thought
     template_name = 'deletethought.html'
-    context_object_name = 'delete'
-    success_url = reverse_lazy('users-thoughts')
+    # context_object_name = 'delete'
+
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.request.user.pk})
 
 
 class UsersThoughts(ListView):
     model = Thought
     template_name = 'user/home.html'
     context_object_name = 'thoughts'
+    # paginate_by = 10
    
     def get_queryset(self):
         queryset = Thought.objects.filter(is_private=False)
+        # print("Number of thoughts:", queryset.count())
         return queryset
 
 

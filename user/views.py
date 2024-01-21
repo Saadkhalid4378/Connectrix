@@ -43,18 +43,10 @@ def signup(request):
         if request.method == 'POST':
             form = Signup(request.POST)
             if form.is_valid():
-            #     password1 = form.cleaned_data.get('password1')
-            #     password2 = form.cleaned_data.get('password2')
-
-            #     if password1 != password2:
-            #         form.add_error('password2', 'Passwords do not match')
-            # else:
                 user = form.save()
                 profile = Profile(user=user)
                 profile.save()
                 return redirect('login')
-            else:
-                return HttpResponse(form.error_messages)  
         context = {'form': form}
         return render(request, 'signup.html', context)
 

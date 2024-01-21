@@ -24,39 +24,43 @@
               <form method="post" action="{% url 'signup' %}">
                     {% csrf_token %}
 
-                <div class="form-outline mb-4">
-                  {% comment %} {{ form.username.label_tag }} {% endcomment %}
-                  <i class="fa-solid fa-user"></i>
-                  {{ form.username }}
-                </div>
+ <div class="form-outline mb-4">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {% if form.username.errors %}
+            <span class="text-danger">{{ form.username.errors.0 }}</span>
+        {% endif %}
+    </div>
 
-                <div class="form-outline mb-4">
-                  {{ form.email.label_tag }}
-                  <i class="fa-solid fa-envelope"></i>
-                  {{ form.email }}
-                </div>
+    <div class="form-outline mb-4">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% if form.email.errors %}
+            <span class="text-danger">{{ form.email.errors.0 }}</span>
+        {% endif %}
+    </div>
 
-                <div class="form-outline mb-4">
-                  {{ form.password1.label_tag }}
-                  <i class="fa-solid fa-lock"></i>
-                  <p>{{ form.password1 }}</p>
-                </div>
+    <div class="form-outline mb-4">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <span class="text-danger">{{ form.password1.errors.0 }}</span>
+        {% endif %}
+    </div>
 
-                <div class="form-outline mb-4">
-                  {{ form.password2.label_tag }}
-                  <i class="fa-solid fa-lock"></i>
-                  {{ form.password2 }}
-                </div>
+    <div class="form-outline mb-4">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <span class="text-danger">{{ form.password2.errors.0 }}</span>
+        {% endif %}
+    </div>
 
-                {% comment %} {% if not request.user.is_authenticated %}
-                <h1>{{error}}</h1>
-                {% endif %} {% endcomment %}
-
-                {% comment %} {% if form.password2.errors %}
-                <div class="invalid-feedback">
-                    {{ form.password2.errors }}
-                </div>
-                {% endif %} {% endcomment %}
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ form.errors }}
+        </div>
+            {% endif %}
 
                 <div class="form-check d-flex justify-content-center mb-5">
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
@@ -64,7 +68,6 @@
                     I agree to all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                   </label>
                 </div>
-
                 <div class="d-flex justify-content-center">
                   <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>

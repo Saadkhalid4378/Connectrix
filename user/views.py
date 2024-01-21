@@ -75,20 +75,18 @@ class ProfileView(LoginRequiredMixin, ListView):
     model = User
     form = ProfileForm
     template_name = 'profile.html'
-    # fields = '__all__'
-    # context_object_name = 'profile' 
+    # ordering = ['-date_joined']
     # add a slug field in models.py according to user name
     def get_context_data(self, **kwargs: Any):
         user=self.request.user
+        detail = Profile.objects.filter(user=user)
         queryset = Thought.objects.filter(user=user)
         context = {'thought': queryset, 
                     'username': user.username,
                     'email': user.email,
-                    #  'bio': user.bio,
-                    #  'DOB': user.date_of_birth,
-                    #  'phone': user.phone,
-                    #  'city': user.city
+                    'detail': detail
                     } 
+        # print(detail.bio)
         return(context)
 
 
@@ -99,8 +97,6 @@ class EditProfile(LoginRequiredMixin, UpdateView):
     template_name = 'user/updateprofile.html'
     fields = ['bio', 'date_of_birth', 'phone', 'city', 'image']
     # context_object_name = 'editprofile'
-    # slug_field = 'slug'
-    # slug_url_kwarg = 'slug'
 
     def get_object(self, queryset=None):
         # Retrieve the Profile object based on the user ID

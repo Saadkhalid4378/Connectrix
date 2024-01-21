@@ -37,7 +37,7 @@ class UsersThoughts(ListView):
      for reply "replyes" will store the comment id 
      and thought.id on which person is commenting    """
 
-@login_required
+@login_required(login_url='login')
 def reply_Comment(request,id):
         replyes = get_object_or_404(Comment, id=id)
         reply = replyes.reply.all()
@@ -50,7 +50,7 @@ def reply_Comment(request,id):
         return render( request, 'thought_detail.html', context)
 
 
-@login_required
+@login_required(login_url='login')
 def thought_detail(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)
     comment = thought.comment.all()
@@ -92,7 +92,7 @@ def thought_detail(request, thought_id):
     return render(request, 'thought_detail.html', context)
 
 
-@login_required
+@login_required(login_url='login')
 def create_thought(request):
     if request.method == 'POST':
         form = ThoughtForm(request.POST, request.FILES)
@@ -109,7 +109,7 @@ def create_thought(request):
 
 
 
-@login_required
+@login_required(login_url='login')
 def share_thought(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)
 

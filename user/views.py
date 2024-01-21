@@ -1,11 +1,11 @@
 from typing import Any
-from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, HttpResponse,get_object_or_404, HttpResponseRedirect
-# from django.urls import reverse
+from django.urls import reverse
 from user.forms import Signup, ProfileForm
 from user.models import User, Profile
 from thought.models import Thought
+# from django.db.models.query import QuerySet
 # from django.views import View
 # from thought.views import User_thought
 from django.views.generic import TemplateView, ListView, CreateView,DetailView, DeleteView
@@ -70,7 +70,8 @@ def home(request):
 #             return queryset
 
 # @method_decorator(login_required(login_url='login'), name='dispatch')
-class ProfileView(ListView):
+class ProfileView(LoginRequiredMixin, ListView):
+    login_url = 'login'
     model = User
     form = ProfileForm
     template_name = 'profile.html'
@@ -90,18 +91,6 @@ class ProfileView(ListView):
                     } 
         return(context)
 
-    # def get_queryset(self) -> QuerySet[Any]:
-    #     return super().get_queryset(User_thought)
-    
-    # def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-    #      QuerySet = User_thought
-    #      return super().get(QuerySet)
-
-    # def get(self, request, *args, **kwargs):
-    #     self.object_list = self.get_queryset(User_thought)
-    #     allow_empty = self.get_allow_empty()
-
-
 
 
 class EditProfile(LoginRequiredMixin, UpdateView):
@@ -117,3 +106,6 @@ class EditProfile(LoginRequiredMixin, UpdateView):
         # Retrieve the Profile object based on the user ID
         user_id = self.request.user.id
         return get_object_or_404(Profile, user_id=user_id)
+    
+    def get_success_url(self) -> str:
+        return reverse('profile', kwargs={'pk': self.request.user.pk})

@@ -3,20 +3,20 @@
 {% block section %}
 
   <button class="btn btn-outline-success me-2" type="submit">
-    <a href="{% url 'edit_profile' user.pk %}">Edit Profile </a>
+    <a href="{% url 'edit_profile' user.pk %}" style="color: green;" >Edit Profile </a>
   </button>
   <hr>
 
 <!-- this is user to ceate thought(post) -->
   <button class="btn btn-outline-success me-2" type="submit" > 
-    <a href="{% url 'create-thought' %}"> Create thought </a> </button>
+    <a href="{% url 'create-thought' %}" style="color: green;" > Create thought </a> </button>
   </form>
   <!-- end ceate thought(post) -->  
 
   <!-- display user detail -->  
-<h1>{{ username }}</h1>
+<h1>User name :{{ username }}</h1>
 <p>Email: {{ email }}</p>
-{% comment %} <p>Email: {{ bio }}</p>
+ {% comment %} <p>Bio: {{ bio }}</p>
 <p>Email: {{ DOB }}</p>
 <p>Email: {{ phone }}</p>
 <p>Email: {{ city }}</p> {% endcomment %}
@@ -36,7 +36,7 @@
                 <h5 class="card-title">{{ thought.title }}</h5>
                 <h5 class="card-title">{{ thought.text }}</h5>
                 <p class="card-text">{{ thought.date_time }}</p>
-                <a href="{% url 'delete-thought' thought.pk %}" class="btn btn-primary">Delete Post</a> 
+                <a href="{% url 'delete-thought' thought.pk %}" class="btn btn-primary" >Delete Post</a> 
               </div>
           </div>
     {% endfor %}

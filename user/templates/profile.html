@@ -13,12 +13,15 @@
   </form>
   <!-- end ceate thought(post) -->  
 
+  <!-- display user detail -->  
 <h1>{{ username }}</h1>
 <p>Email: {{ email }}</p>
 {% comment %} <p>Email: {{ bio }}</p>
 <p>Email: {{ DOB }}</p>
 <p>Email: {{ phone }}</p>
 <p>Email: {{ city }}</p> {% endcomment %}
+  <!-- end user deetail -->  
+
 
 
 
@@ -33,7 +36,7 @@
                 <h5 class="card-title">{{ thought.title }}</h5>
                 <h5 class="card-title">{{ thought.text }}</h5>
                 <p class="card-text">{{ thought.date_time }}</p>
-        {% comment %} <a href="{% url 'user_thought' %}" class="btn btn-primary">Details</a> {% endcomment %}
+                <a href="{% url 'delete-thought' thought.pk %}" class="btn btn-primary">Delete Post</a> 
               </div>
           </div>
     {% endfor %}

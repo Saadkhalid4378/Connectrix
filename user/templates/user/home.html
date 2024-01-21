@@ -3,31 +3,36 @@
 
 {% block section %}
 
-<p>this is home page</p>
-  {% comment %} <h1>List view</h1> {% endcomment %}
-{% comment %} {% for thought in thoughts %}
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{ thought.title }}</h5>
-      <p class="card-text">{{ thought.user.username }}</p>
-      <a href="{% url 'thought_detail' thought.pk %}" class="card-link">Details</a>
-    </div>
-    <img src="{{ thought.image.url }}" class="card-img-bottom" alt="{{ thought.title }}">
-  </div>
-{% endfor %} {% endcomment %}
-<!-- <button type="submit" > <a href="profile"> profile </a> </button> -->
+{% comment %} <p>this is home page</p> {% endcomment %}
+  
 {% for thought in thoughts %}
-<div class="card" style="width: 40%; height: 0%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
-  <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+<div class="card" style="width: 40%; hight: 30%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
+    <p class="card-text">User : {{ thought.user.username }} {{ thought.date_time }}</p>
+    {% comment %} <p class="card-text">{{ thought.date_time }}</p> {% endcomment %}
   <div class="card-body">
-    <p class="card-text">User : {{ thought.user.username }}</p>
+  <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
     <h5 class="card-title">{{ thought.title }}</h5>
     <h5 class="card-title">{{ thought.text }}</h5>
-    <p class="card-text">{{ thought.date_time }}</p>
     <a href="{% url 'thought-detail' thought.pk %}" class="btn btn-primary">Details</a>
     <a href="{% url 'share-thought' thought.pk %}" class="btn btn-primary">share Post</a>
   </div>
 </div>
 {% endfor %}
+{% comment %} <div class="pagination">
+  <span class="step-links">
+    {% if thoughts.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ thoughts.previous_page_number }}">previous</a>
+    {% endif %}
 
+    <span class="current">
+      Page {{ thoughts.number }} of {{ thoughts.paginator.num_pages }}.
+    </span>
+
+    {% if thoughts.has_next %}
+      <a href="?page={{ thoughts.next_page_number }}">next</a>
+      <a href="?page={{ thoughts.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div> {% endcomment %}
 {% endblock section %}

@@ -34,7 +34,7 @@ def login_page(request):
             # return redirect('create_thought')
             # return HttpResponse('homepage') 
         else:
-            return HttpResponse(user)
+            return render(request, 'login.html', {'error_message': 'Invalid username or password'})
     context = {'login': login}
     return render(request, 'login.html', context)
 

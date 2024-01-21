@@ -39,7 +39,11 @@
                   <div class="form-outline mb-4">
                     <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" />
                   </div>
-
+                                        {% if error_message %}
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ error_message }}
+                                            </div>
+                                        {% endif %}
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                   </div>

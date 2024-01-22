@@ -1,5 +1,7 @@
 from typing import Any
-from django.http import HttpRequest, HttpResponse
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
+from django.http import HttpRequest
 from django.shortcuts import render, redirect, HttpResponse,get_object_or_404, HttpResponseRedirect
 from django.urls import reverse
 from user.forms import Signup, ProfileForm
@@ -17,6 +19,18 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 
+
+class DeleteProfile(DeleteView):
+    model = User
+    template_name = "user/_delete_form.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse('signup')
+        
+    
 def logout_user(request):
     # if request.method == 'POST':
         if request.user.is_authenticated:
@@ -50,7 +64,6 @@ def signup(request):
         context = {'form': form}
         return render(request, 'signup.html', context)
 
-
 def home(request):
     return redirect("/thought/users-thoughts")
     # return render(request, 'user/home.html')
@@ -75,7 +88,6 @@ class ProfileView(LoginRequiredMixin, ListView):
                     } 
         # print(detail.bio)
         return(context)
-
 
 
 class EditProfile(LoginRequiredMixin, UpdateView):

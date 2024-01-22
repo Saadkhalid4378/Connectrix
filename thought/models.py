@@ -4,11 +4,11 @@ from user.models import User
 
 class Thought(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=16)
+    title = models.CharField(max_length=32)
     image = models.ImageField(upload_to="thought_image/", default='default.jpg')
     date_time = models.DateTimeField(auto_now_add=True)
     is_private = models.BooleanField(default=True)
-    text = models.CharField(max_length = 264, blank=True, null=True)
+    text = models.CharField(max_length = 512, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.title}'

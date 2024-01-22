@@ -3,7 +3,8 @@ from django.urls import path
 from thought import views
 urlpatterns = [
 
-    path('delete-thought/<pk>/', views.DeleteTHoughts.as_view(), name='delete-thought'),
+    path('update-thought/<pk>/', views.UpdateThought.as_view(), name='update-thought'),
+    path('delete-thought/<pk>/', views.DeleteThoughts.as_view(), name='delete-thought'),
     path('users-thoughts/', views.UsersThoughts.as_view(), name='users-thoughts'),
 
     path('reply-Comment/<id>/', views.reply_Comment, name='reply-Comment'),

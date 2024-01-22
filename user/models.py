@@ -9,7 +9,7 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=30, blank=True, null=True)
+    bio = models.TextField(max_length=128, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null= True)
     phone = models.CharField(max_length=12, blank=True, null=True )
     city = models.CharField(max_length=30)

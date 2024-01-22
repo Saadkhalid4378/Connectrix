@@ -91,7 +91,7 @@
 
   <!-- Display User Thoughts -->
   <div>
-    <h2 class="m-3 text-center ">User Thoughts</h2>
+    <h2 class="m-3 text-center ">User Posts</h2>
     {% for thought in thought %}
           <div class="card" style="width: 40%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
             <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
@@ -100,6 +100,7 @@
                 <h5 class="card-title">{{ thought.title }}</h5>
                 <h5 class="card-title">{{ thought.text }}</h5>
                 <p class="card-text">{{ thought.date_time }}</p>
+                <a href="{% url 'update-thought' thought.pk %}" class="btn btn-primary" >Update Post</a> 
                 <a href="{% url 'delete-thought' thought.pk %}" class="btn btn-primary" >Delete Post</a> 
               </div>
           </div>

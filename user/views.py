@@ -56,19 +56,6 @@ def home(request):
     # return render(request, 'user/home.html')
 
 
-# class UserThought(ListView):
-#     model = Thought
-#     template_name = 'profile.html'
-#     context_object_name = 'thought'
-
-#     def get_queryset(self):
-#         # Filter thoughts based on the is_private field and the current user
-#         # if ['is_private']:
-#             user=self.request.user
-#             queryset = Thought.objects.filter(user=user)
-#             print(queryset)
-#             return queryset
-
 # @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProfileView(LoginRequiredMixin, ListView):
     login_url = 'login'
@@ -105,3 +92,17 @@ class EditProfile(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self) -> str:
         return reverse('profile', kwargs={'pk': self.request.user.pk})
+    
+
+    # class UserThought(ListView):
+#     model = Thought
+#     template_name = 'profile.html'
+#     context_object_name = 'thought'
+
+#     def get_queryset(self):
+#         # Filter thoughts based on the is_private field and the current user
+#         # if ['is_private']:
+#             user=self.request.user
+#             queryset = Thought.objects.filter(user=user)
+#             print(queryset)
+#             return queryset

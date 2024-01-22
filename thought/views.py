@@ -5,13 +5,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Thought, Like, Comment, Comment_reply, Share
 from .forms import ThoughtForm
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, DeleteView, UpdateView
 from django.http import JsonResponse
-
 
 # Create your views here.
 
-class DeleteTHoughts(LoginRequiredMixin, DeleteView):
+
+class UpdateThought(UpdateView):
+    model = Thought
+    fields = ['title','is_private', 'text']
+    template_name = "_update_form.html"
+    context_object_name = 'updatethought'
+    
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.request.user.pk})
+
+
+class DeleteThoughts(LoginRequiredMixin, DeleteView):
     model = Thought
     template_name = 'deletethought.html'
     # context_object_name = 'delete'

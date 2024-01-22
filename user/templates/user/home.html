@@ -6,11 +6,12 @@
 {% comment %} <p>this is home page</p> {% endcomment %}
   
 {% for thought in thoughts %}
-<div class="card" style="width: 40%; hight: 30%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 2px solid green; ">
-    <p class="card-text">User : {{ thought.user.username }} {{ thought.date_time }}</p>
+<div class="card" style="width: 35%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 1px solid rgb(119, 165, 146); ">
+    <p class="card-text h5">(User : {{ thought.user.username }}) Posted on : {{ thought.date_time }}</p>
     {% comment %} <p class="card-text">{{ thought.date_time }}</p> {% endcomment %}
   <div class="card-body">
-  <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}">
+    <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}" style="height: 10rem;">
+
     <h5 class="card-title">{{ thought.title }}</h5>
     <h5 class="card-title">{{ thought.text }}</h5>
     <a href="{% url 'thought-detail' thought.pk %}" class="btn btn-primary">Details</a>

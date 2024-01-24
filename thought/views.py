@@ -1,12 +1,11 @@
  
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Thought, Like, Comment, Comment_reply, Share
 from .forms import ThoughtForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DeleteView, UpdateView
-from django.http import JsonResponse
 
 # Create your views here.
 
@@ -53,7 +52,7 @@ class UsersThoughts(ListView):
 
 @login_required(login_url='login')
 def reply_Comment(request,id):
-        replyes = get_object_or_404(Comment, id=id)
+        replyes = get_object_or_404(Comment, id=id)  
         reply = replyes.reply.all()
 
         if request.method == 'POST':
@@ -127,15 +126,16 @@ def create_thought(request):
 def share_thought(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)
 
-    # Check if the thought has already been shared by the user
+   
     if Share.objects.filter(user=request.user, thought=thought).exists():
-        # Handle case where the user has already shared this thought
-        return JsonResponse({'message': 'You have already shared this thought.'}, status=400)
+       
+        return HttpResponse({'You have already shared this thought.'}, status=400)
 
-    # Create a new Share instance
+    
     new_share = Share(user=request.user, thought=thought)
     new_share.save()
 
-    # Optionally, you can perform additional actions here, such as sending notifications or updating counters.
+   
 
-    return JsonResponse({'message': 'Thought shared successfully.'})
+    return HttpResponse({'Thought shared successfully.'})
+  

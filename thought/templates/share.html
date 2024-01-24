@@ -1,40 +1,9 @@
-<!-- thought_detail.html (or any appropriate template) -->
+   {% extends "base.html" %}
 
-{% extends 'base.html' %}
+{% block section %}
 
-{% block content %}
-  <h1>{{ thought.title }}</h1>
-  <p>{{ thought.content }}</p>
+  <h1>List view</h1>
+  
 
-  <!-- Add a share button -->
-  <button id="share-btn">Share</button>
 
-  <script>
-    document.getElementById('share-btn').addEventListener('click', function() {
-      // Send an AJAX request to share the thought
-      fetch(`/thought/{{ thought.id }}/share/`, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token for security
-          'Content-Type': 'application/json',
-        },
-        credentials: 'same-origin',  // Include credentials for cross-origin requests
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to share thought.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Handle successful share
-        alert(data.message);
-      })
-      .catch(error => {
-        // Handle errors
-        console.error(error);
-        alert('An error occurred while sharing the thought.');
-      });
-    });
-  </script>
-{% endblock %}
+{% endblock section %}

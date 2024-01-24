@@ -2,25 +2,26 @@ from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
-from django.shortcuts import render, redirect, HttpResponse,get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from user.forms import Signup, ProfileForm
 from user.models import User, Profile
 from thought.models import Thought
+from django.views.generic import TemplateView, ListView, CreateView,DetailView, DeleteView
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate, login, logout
 # from django.db.models.query import QuerySet
 # from django.views import View
 # from thought.views import User_thought
-from django.views.generic import TemplateView, ListView, CreateView,DetailView, DeleteView
-from django.views.generic.edit import UpdateView
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.decorators import method_decorator
-from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth.decorators import login_required
+# from django.utils.decorators import method_decorator
 # Create your views here.
 
 
 
-class DeleteProfile(DeleteView):
+class DeleteProfile(LoginRequiredMixin, DeleteView):
+    # login_url = 'login'
     model = User
     template_name = "user/_delete_form.html"
 
@@ -91,6 +92,7 @@ class ProfileView(LoginRequiredMixin, ListView):
 
 
 class EditProfile(LoginRequiredMixin, UpdateView):
+    # login_url = 'login'
     model = Profile
     form = ProfileForm
     template_name = 'user/updateprofile.html'

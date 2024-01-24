@@ -53,6 +53,9 @@
                 <a href="{% url 'logout' %}" style="color: green;">Logout</a>
              {% else %}
                 <a href="{% url 'login' %}" style="color: green;">Login</a>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="{% url 'signup' %}" style="color: green;">signup</a>
+            </button>
             {% endif %} 
             </button> 
             </form>

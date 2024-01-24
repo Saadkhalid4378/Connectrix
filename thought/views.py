@@ -10,17 +10,20 @@ from django.views.generic import ListView, DeleteView, UpdateView
 # Create your views here.
 
 
-class UpdateThought(UpdateView):
+class UpdateThought(LoginRequiredMixin, UpdateView):
+    # login_url = 'login'
     model = Thought
     fields = ['title','is_private', 'text']
     template_name = "_update_form.html"
     context_object_name = 'updatethought'
     
     def get_success_url(self):
-        return reverse_lazy('profile', kwargs={'pk': self.request.user.pk})
+        profileId = self.kwargs['pk']
+        return reverse_lazy('profile', kwargs={'pk': profileId})
 
 
 class DeleteThoughts(LoginRequiredMixin, DeleteView):
+    # login_url = 'login'
     model = Thought
     template_name = 'deletethought.html'
     # context_object_name = 'delete'
@@ -30,6 +33,7 @@ class DeleteThoughts(LoginRequiredMixin, DeleteView):
 
 
 class UsersThoughts(ListView):
+    # login_url = 'login'
     model = Thought
     template_name = 'user/home.html'
     context_object_name = 'thoughts'

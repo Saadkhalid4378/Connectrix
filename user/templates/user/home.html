@@ -6,18 +6,25 @@
 {% comment %} <p>this is home page</p> {% endcomment %}
   
 {% for thought in thoughts %}
-<div class="card" style="width: 35%; margin-bottom: 1rem; margin-left: auto; margin-right: auto; border: 1px solid rgb(119, 165, 146); ">
-    <p class="card-text h5">(User : {{ thought.user.username }}) Posted on : {{ thought.date_time }}</p>
+<div class="card" style="width: 30%; margin-bottom: 0.3rem; margin-left: auto; margin-right: auto; border: 1px solid rgb(119, 165, 146); ">
+    <p style="color: rgb(204, 150, 49); padding-left: 1rem; " class="card-text h5">{{ thought.user.username }} 
+      <span style="color: black;" >{{ thought.date_time }}</span></p>
     {% comment %} <p class="card-text">{{ thought.date_time }}</p> {% endcomment %}
   <div class="card-body">
-    <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}" style="height: 10rem;">
+  {% if thought.image %}
+    <img src="{{ thought.image.url }}" class="card-img-top" alt="{{ thought.title }}" style="height: 18rem; padding-bottom: 0.3rem;">
+  {% else %}
+   {{ thought.text }}
+  {% endif %}
 
     <h5 class="card-title">{{ thought.title }}</h5>
     <h5 class="card-title">{{ thought.text }}</h5>
-    <a href="{% url 'thought-detail' thought.pk %}" class="btn btn-primary">Details</a>
-    <a href="{% url 'share-thought' thought.pk %}" class="btn btn-primary">share Post</a>
   </div>
 </div>
+  <div class="card-body" style=" margin-bottom: 1rem; margin-left: 35.5%; margin-right: auto; ">
+    <a href="{% url 'thought-detail' thought.pk %}" class="" style=" color: black; margin-right: 0.5rem;"><i class="fa-solid fa-circle-info"></i></a>
+    <a href="{% url 'share-thought' thought.pk %}" class="" style=" color: black; "><i class="fa-solid fa-paper-plane"></i></a>
+  </div>
 {% endfor %}
 {% comment %} <div class="pagination">
   <span class="step-links">

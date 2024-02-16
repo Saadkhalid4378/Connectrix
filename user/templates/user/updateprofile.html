@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block section %}
 
 <!-- this is user to update(edit) user profile -->
@@ -17,7 +19,7 @@
     <li><strong>Phone:</strong> {{ object.phone }}</li>
     <li><strong>City:</strong> {{ object.city }}</li>
     {% if object.image %}
-      <li><strong>Profile Image:</strong> <img src="{{ object.image.url }}" alt="Profile Image"></li>
+      <li><strong>Profile Image:</strong> <img src="{{ object.image.url }}" alt="Profile Image">{{ object.image }}</li>
     {% endif %}
   </ul>
 <!-- end to update(edit) user profile -->
